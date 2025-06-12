@@ -256,6 +256,8 @@
 				DEVELOPMENT_TEAM = ZAKSG2QLGT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Precisamos da sua localização para monitorar áreas próximas.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Precisamos de acesso a sua localização para determinar sítios de escavação";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -285,6 +287,8 @@
 				DEVELOPMENT_TEAM = ZAKSG2QLGT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Precisamos da sua localização para monitorar áreas próximas.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Precisamos de acesso a sua localização para determinar sítios de escavação";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
