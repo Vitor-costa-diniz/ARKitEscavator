@@ -10,9 +10,22 @@
 		4AA291302DFB0D6100C1E2BB /* ARKitEscavator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARKitEscavator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		4AA291592DFB116A00C1E2BB /* Exceptions for "ARKitEscavator" folder in "ARKitEscavator" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 4AA2912F2DFB0D6100C1E2BB /* ARKitEscavator */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4AA291322DFB0D6100C1E2BB /* ARKitEscavator */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				4AA291592DFB116A00C1E2BB /* Exceptions for "ARKitEscavator" folder in "ARKitEscavator" target */,
+			);
 			path = ARKitEscavator;
 			sourceTree = "<group>";
 		};
@@ -256,6 +269,7 @@
 				DEVELOPMENT_TEAM = ZAKSG2QLGT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ARKitEscavator/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Precisamos da sua localização para monitorar áreas próximas.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Precisamos de acesso a sua localização para determinar sítios de escavação";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -287,6 +301,7 @@
 				DEVELOPMENT_TEAM = ZAKSG2QLGT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ARKitEscavator/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Precisamos da sua localização para monitorar áreas próximas.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Precisamos de acesso a sua localização para determinar sítios de escavação";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
