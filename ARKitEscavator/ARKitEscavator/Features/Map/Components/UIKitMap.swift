@@ -21,13 +21,13 @@ struct UIKitMap: UIViewRepresentable {
         let coordinate = CLLocationCoordinate2D(latitude: -3.744459241140999, longitude: -38.53652440961214)
         let region = MKCoordinateRegion(
             center: coordinate,
-            latitudinalMeters: 2000,
-            longitudinalMeters: 2000
+            latitudinalMeters: 200,
+            longitudinalMeters: 200
         )
         
         mapView.setRegion(region, animated: true)
         
-        let circle = MKCircle(center: coordinate, radius: 10)
+        let circle = MKCircle(center: coordinate, radius: 5)
         mapView.addOverlay(circle)
         
         return mapView
@@ -47,9 +47,9 @@ struct UIKitMap: UIViewRepresentable {
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             if let circleOverlay = overlay as? MKCircle {
                 let renderer = MKCircleRenderer(circle: circleOverlay)
-                renderer.fillColor = UIColor.systemBlue.withAlphaComponent(0.3)
-                renderer.strokeColor = UIColor.blue
-                renderer.lineWidth = 2
+                renderer.fillColor = UIColor.systemRed.withAlphaComponent(0.2)
+                renderer.strokeColor = UIColor.systemRed
+                renderer.lineWidth = 1
                 return renderer
             }
             return MKOverlayRenderer(overlay: overlay)
