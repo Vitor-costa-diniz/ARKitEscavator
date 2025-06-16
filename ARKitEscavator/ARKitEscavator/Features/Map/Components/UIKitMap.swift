@@ -10,6 +10,7 @@ import MapKit
 
 struct UIKitMap: UIViewRepresentable {
     let majorSites: [MajorEscavationSite]
+    let radius: Double
     
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
@@ -30,7 +31,7 @@ struct UIKitMap: UIViewRepresentable {
                     point.coordinate = $0.coordinates
                     uiView.addAnnotation(point)
                     
-                    let circle = MKCircle(center: $0.coordinates, radius: 10)
+                    let circle = MKCircle(center: $0.coordinates, radius: radius)
                     uiView.addOverlay(circle)
                 })
             }
@@ -70,5 +71,5 @@ struct UIKitMap: UIViewRepresentable {
 }
 
 #Preview {
-    UIKitMap(majorSites: [.init()])
+    UIKitMap(majorSites: [.init()], radius: 10)
 }
