@@ -15,7 +15,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var userLocation: CLLocationCoordinate2D?
     
     private var monitoredSites: [MajorEscavationSite] = [.init()]
-    private var radius: Double = 20
+    private var radius: Double = 10
     private var onEnterRegion: ((EscavationSite) -> Void)?
 
     private override init() {
@@ -58,7 +58,6 @@ extension LocationManager {
         for point in allPoints {
             let targetLoc = CLLocation(latitude: point.coordinates.latitude, longitude: point.coordinates.longitude)
             let distance = userLoc.distance(from: targetLoc)
-            
             if distance <= radius {
                 onEnterRegion?(point)
                 return
