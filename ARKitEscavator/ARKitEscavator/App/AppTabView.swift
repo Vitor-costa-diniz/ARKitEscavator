@@ -13,7 +13,7 @@ struct AppTabView: View {
     var body: some View {
         TabView(selection: $tabSelection) {
             Tab("Mapa", systemImage: "map", value: 0) {
-                Text("Mapa")
+                MapView()
             }
             
             Tab("Bau", systemImage: "house", value: 1) {
