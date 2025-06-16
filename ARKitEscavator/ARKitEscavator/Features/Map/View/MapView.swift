@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MapView: View {
     var body: some View {
-        UIKitMap()
+        UIKitMap(majorSites: [.init()])
             .ignoresSafeArea()
     }
 }

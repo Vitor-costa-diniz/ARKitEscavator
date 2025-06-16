@@ -9,7 +9,7 @@ import SwiftUI
 import MapKit
 
 struct UIKitMap: UIViewRepresentable {
-    let point: MKPointAnnotation = .init()
+    let majorSites: [MajorEscavationSite]
     
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
@@ -18,25 +18,23 @@ struct UIKitMap: UIViewRepresentable {
         mapView.mapType = .mutedStandard
         mapView.userTrackingMode = .follow
         
-        let coordinate = CLLocationCoordinate2D(latitude: -3.744459241140999, longitude: -38.53652440961214)
-        let region = MKCoordinateRegion(
-            center: coordinate,
-            latitudinalMeters: 200,
-            longitudinalMeters: 200
-        )
-        
-        mapView.setRegion(region, animated: true)
-        
-        let circle = MKCircle(center: coordinate, radius: 5)
-        mapView.addOverlay(circle)
-        
         return mapView
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        point.coordinate = CLLocationCoordinate2D(latitude: -3.744459241140999, longitude: -38.53652440961214)
-        point.title = "Apple developer Academy"
-        uiView.addAnnotation(point)
+        if uiView.annotations.isEmpty {
+            for escavation in majorSites {
+                escavation.escavations.forEach({
+                    let point = MKPointAnnotation()
+                    point.title = $0.title
+                    point.coordinate = $0.coordinates
+                    uiView.addAnnotation(point)
+                    
+                    let circle = MKCircle(center: $0.coordinates, radius: 10)
+                    uiView.addOverlay(circle)
+                })
+            }
+        }
     }
     
     func makeCoordinator() -> Coordinator {
@@ -44,6 +42,20 @@ struct UIKitMap: UIViewRepresentable {
     }
     
     class Coordinator: NSObject, MKMapViewDelegate {
+        private var hasCenteredOnUser = false
+        
+        func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+            if !hasCenteredOnUser {
+                let region = MKCoordinateRegion(
+                    center: userLocation.coordinate,
+                    span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+                )
+                mapView.setRegion(region, animated: true)
+                
+                hasCenteredOnUser = true
+            }
+        }
+        
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             if let circleOverlay = overlay as? MKCircle {
                 let renderer = MKCircleRenderer(circle: circleOverlay)
@@ -58,5 +70,5 @@ struct UIKitMap: UIViewRepresentable {
 }
 
 #Preview {
-    UIKitMap()
+    UIKitMap(majorSites: [.init()])
 }
