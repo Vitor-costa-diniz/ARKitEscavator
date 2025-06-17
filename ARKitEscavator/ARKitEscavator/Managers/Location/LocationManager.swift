@@ -9,12 +9,12 @@ import Foundation
 import CoreLocation
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-    static let shared: LocationManager = LocationManager()
-    
     private let manager = CLLocationManager()
+    
+    static let shared: LocationManager = LocationManager()
     @Published var userLocation: CLLocationCoordinate2D?
     
-    private var monitoredSites: [MajorEscavationSite] = [.init()]
+    private var monitoredSites: [EscavationSite] = [.init()]
     private var radius: Double = 10
     private var onEnterRegion: ((EscavationSite) -> Void)?
 
@@ -25,23 +25,54 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         requestPermission()
     }
     
-    func requestPermission() {
-        manager.requestWhenInUseAuthorization()
-        manager.startUpdatingLocation()
-    }
-    
     func monitoringRegion(points: [MajorEscavationSite], radius: Double, onEnter: @escaping (EscavationSite) -> Void) {
-        self.monitoredSites = points
-        self.radius = radius
+        stopMonitoringAllRegions()
+        self.monitoredSites = points.flatMap { $0.escavations }
         self.onEnterRegion = onEnter
+        self.radius = radius
+        
+        guard CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) else {
+            print("Geofencing is not supported on this device.")
+            return
+        }
+        
+        for site in self.monitoredSites {
+            let region = CLCircularRegion(
+                center: site.coordinates,
+                radius: radius,
+                identifier: site.id.uuidString
+            )
+            
+            region.notifyOnEntry = true
+            region.notifyOnExit = false
+            
+            manager.startMonitoring(for: region)
+            
+            if region.contains(manager.location?.coordinate ?? CLLocationCoordinate2D()) {
+                DispatchQueue.main.async {
+                    self.onEnterRegion?(site)
+                }
+            }
+        }
     }
     
+    // MARK: - CLLocationManagerDelegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             DispatchQueue.main.async {
                 self.userLocation = location.coordinate
-                self.checkIfEnteredRegion(userCoord: self.userLocation ?? CLLocationCoordinate2D(latitude: -3.744459241140999, longitude: -38.53652440961214))
             }
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        guard let site = monitoredSites.first(where: { $0.id.uuidString == region.identifier }) else {
+            print("Could not find a matching site for region identifier: \(region.identifier)")
+            return
+        }
+        
+        DispatchQueue.main.async {
+            self.onEnterRegion?(site)
         }
     }
     
@@ -51,17 +82,25 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 }
 
 extension LocationManager {
-    private func checkIfEnteredRegion(userCoord: CLLocationCoordinate2D) {
-        let userLoc = CLLocation(latitude: userCoord.latitude, longitude: userCoord.longitude)
-        let allPoints = monitoredSites.flatMap({ $0.escavations})
+    private func stopMonitoringAllRegions() {
+        for region in manager.monitoredRegions {
+            manager.stopMonitoring(for: region)
+        }
+    }
+    
+    private func requestPermission() {
+        let status = manager.authorizationStatus
 
-        for point in allPoints {
-            let targetLoc = CLLocation(latitude: point.coordinates.latitude, longitude: point.coordinates.longitude)
-            let distance = userLoc.distance(from: targetLoc)
-            if distance <= radius {
-                onEnterRegion?(point)
-                return
-            }
+        switch status {
+        case .notDetermined:
+            manager.requestWhenInUseAuthorization()
+        case .authorizedWhenInUse:
+            manager.requestAlwaysAuthorization()
+            manager.startUpdatingLocation()
+        case .authorizedAlways:
+            manager.startUpdatingLocation()
+        default:
+            break
         }
     }
 }

@@ -10,12 +10,7 @@ import Foundation
 final class MapViewModel: ObservableObject {
     private var locationManager: LocationManager = LocationManager.shared
     var escavationSites: [MajorEscavationSite] = [.init()]
-    
-    @Published var radius: Double = 10 {
-        didSet {
-            monitoringRegion()
-        }
-    }
+    @Published var radius: Double = 30
     
     func monitoringRegion() {
         locationManager.monitoringRegion(points: escavationSites, radius: radius) { point in
