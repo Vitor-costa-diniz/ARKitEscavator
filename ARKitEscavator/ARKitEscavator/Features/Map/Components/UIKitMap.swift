@@ -23,18 +23,17 @@ struct UIKitMap: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        uiView.removeOverlays(uiView.overlays)
-        uiView.removeAnnotations(uiView.annotations)
-        
-        for escavation in majorSites {
-            escavation.escavations.forEach {
-                let point = MKPointAnnotation()
-                point.title = $0.title
-                point.coordinate = $0.coordinates
-                uiView.addAnnotation(point)
-                
-                let circle = MKCircle(center: $0.coordinates, radius: radius)
-                uiView.addOverlay(circle)
+        if uiView.annotations.isEmpty {
+            for escavation in majorSites {
+                escavation.escavations.forEach {
+                    let point = MKPointAnnotation()
+                    point.title = $0.title
+                    point.coordinate = $0.coordinates
+                    uiView.addAnnotation(point)
+                    
+                    let circle = MKCircle(center: $0.coordinates, radius: radius)
+                    uiView.addOverlay(circle)
+                }
             }
         }
     }
