@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+enum ActionIcon: String {
+    case info = "info.circle"
+    case location = "location"
+    case locationNorth = "location.north.line"
+}
+
 struct ActionMapButton: View {
     let icon: ActionIcon
     let action: () -> Void
@@ -23,10 +29,17 @@ struct ActionMapButton: View {
     
     var body: some View {
         ZStack {
-            ActionMapShape(crackPosition: position)
-                .frame(width: 36, height: 37)
-                .foregroundStyle(.buttonShadow)
-                .offset(y: 2.5)
+            if position == .bottom {
+                ActionMapBottomShadowShape()
+                                    .frame(width: 36, height: 37)
+                                    .foregroundStyle(.buttonShadow)
+                                    .offset(y: 2.5)
+            } else {
+                ActionMapShape(crackPosition: position)
+                    .frame(width: 36, height: 37)
+                    .foregroundStyle(.buttonShadow)
+                    .offset(y: 2.5)
+            }
             
             ActionMapShape(crackPosition: position)
                 .frame(width: 36, height: 37)
@@ -46,11 +59,5 @@ struct ActionMapButton: View {
 }
 
 #Preview {
-    ActionMapButton(icon: .location) {}
-}
-
-enum ActionIcon: String {
-    case info = "info.circle"
-    case location = "location"
-    case locationNorth = "location.north.line"
+    ActionMapButton(icon: .locationNorth) {}
 }
