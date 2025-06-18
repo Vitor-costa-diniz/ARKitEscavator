@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+enum ColorType {
+    case blue
+    case green
+}
+
 struct LargeLabelComponent: View {
     let text: String
     let colorType: ColorType
@@ -40,11 +45,12 @@ struct LargeLabelComponent: View {
     
     var body: some View {
         Text(text)
+            .multilineTextAlignment(.center)
+            .frame(maxWidth: 309)
+            .frame(minHeight: 69)
             .font(.escavatorUI(.body1Regular))
             .foregroundStyle(.white)
-            .padding(.top, 5)
-            .padding(.bottom, 3)
-            .padding(.horizontal, 8)
+            .padding(.horizontal, 13)
             .background {
                 LabelShape()
                     .foregroundStyle(shadow)
@@ -62,10 +68,5 @@ struct LargeLabelComponent: View {
 }
 
 #Preview {
-    LargeLabelComponent(text: "Olaaa", colorType: .green)
-}
-
-enum ColorType {
-    case blue
-    case green
+    LargeLabelComponent(text: "Procure o ponto de escavação!", colorType: .blue)
 }
