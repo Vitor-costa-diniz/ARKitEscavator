@@ -52,9 +52,9 @@ struct ActionMapButton: View {
             
             Image(systemName: icon.rawValue)
                 .font(.system(size: 20.7, weight: .regular))
-                .foregroundStyle(.buttonShadow)
+                .foregroundStyle(.buttonIcon)
         }
-        .onTapGesture {}
+        .onTapGesture { action() }
     }
 }
 
