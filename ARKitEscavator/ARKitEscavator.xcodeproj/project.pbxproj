@@ -14,7 +14,7 @@
 		4AA291592DFB116A00C1E2BB /* Exceptions for "ARKitEscavator" folder in "ARKitEscavator" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resources/Info.plist,
 			);
 			target = 4AA2912F2DFB0D6100C1E2BB /* ARKitEscavator */;
 		};
