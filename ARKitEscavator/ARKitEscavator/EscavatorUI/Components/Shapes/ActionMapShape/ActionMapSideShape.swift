@@ -1,5 +1,5 @@
 //
-//  ActionMapShape.swift
+//  ActionMapSideShape.swift
 //  ARKitEscavator
 //
 //  Created by Vitor Costa on 18/06/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ActionMapShape: Shape {
+struct ActionMapSideShape: Shape {
     var crackPosition: CrackPosition
 
     func path(in rect: CGRect) -> Path {
@@ -48,14 +48,9 @@ struct ActionMapShape: Shape {
     }
 }
 
-
 #Preview {
     VStack {
-        ActionMapShape(crackPosition: .left)
+        ActionMapSideShape(crackPosition: .right)
             .frame(width: 36, height: 37)
     }
-}
-
-enum CrackPosition {
-    case left, right, bottom
 }

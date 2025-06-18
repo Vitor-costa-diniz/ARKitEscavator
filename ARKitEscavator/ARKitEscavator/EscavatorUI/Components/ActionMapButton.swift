@@ -10,7 +10,16 @@ import SwiftUI
 struct ActionMapButton: View {
     let icon: ActionIcon
     let action: () -> Void
-    @State private var position: CrackPosition = .right
+    private var position: CrackPosition {
+        switch icon {
+        case .info:
+            return .left
+        case .location:
+            return .right
+        case .locationNorth:
+            return .bottom
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -33,21 +42,11 @@ struct ActionMapButton: View {
                 .foregroundStyle(.buttonShadow)
         }
         .onTapGesture {}
-        .onAppear {
-            switch icon {
-            case .info:
-                position = .left
-            case .location:
-                position = .right
-            case .locationNorth:
-                position = .bottom
-            }
-        }
     }
 }
 
 #Preview {
-    ActionMapButton(icon: .info) {}
+    ActionMapButton(icon: .location) {}
 }
 
 enum ActionIcon: String {
