@@ -28,7 +28,7 @@ struct ActionButton: View {
         case .close:
                 .redButtonOverlay
         case .back:
-                .blueBackground
+                .blueButtonOverlay
         }
     }
     
@@ -37,7 +37,7 @@ struct ActionButton: View {
         case .close:
                 .redButtonStroke
         case .back:
-                .blueStroke
+                .blueButtonStroke
         }
     }
     
@@ -46,7 +46,7 @@ struct ActionButton: View {
         case .close:
                 .redButtonShadow
         case .back:
-                .blueShadow
+                .blueButtonShadow
         }
     }
     
@@ -85,5 +85,5 @@ struct ActionButton: View {
 }
 
 #Preview {
-    ActionButton(type: .close)
+    ActionButton(type: .back)
 }
