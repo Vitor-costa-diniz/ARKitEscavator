@@ -23,7 +23,7 @@ enum TypographyCase {
 }
 
 extension Font {
-    static func fourierUI(_ typographyCase: TypographyCase) -> Font {
+    static func escavatorUI(_ typographyCase: TypographyCase) -> Font {
         switch typographyCase {
         case .body2Regular:
             return Font.custom(TokenTypography.FontType.regular.rawValue, size: TokenTypography.FontSize.medium.rawValue)

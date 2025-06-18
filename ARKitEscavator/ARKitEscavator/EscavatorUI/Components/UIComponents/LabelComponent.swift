@@ -8,25 +8,32 @@
 import SwiftUI
 
 struct LabelComponent: View {
+    let text: String
+    let font: Font
+    
     var body: some View {
-        ZStack {
-            LabelShape()
-                .frame(width: 141.5, height: 37)
-                .foregroundStyle(.buttonShadow)
-                .offset(y: 2.5)
-            
-            LabelShape()
-                .foregroundStyle(.buttonStroke)
-                .frame(width: 141.5, height: 37)
-                .overlay {
-                    LabelShape()
-                        .foregroundStyle(.buttonOverlay)
-                        .padding(2.5)
-                }
-        }
+        Text(text)
+            .font(font)
+            .foregroundStyle(.buttonIcon)
+            .padding(.top, 5)
+            .padding(.bottom, 3)
+            .padding(.horizontal, 8)
+            .background {
+                LabelShape()
+                    .foregroundStyle(.buttonShadow)
+                    .offset(y: 2.5)
+                
+                LabelShape()
+                    .foregroundStyle(.buttonStroke)
+                    .overlay {
+                        LabelShape()
+                            .foregroundStyle(.buttonOverlay)
+                            .padding(2.5)
+                    }
+            }
     }
 }
 
 #Preview {
-    LabelComponent()
+    LabelComponent(text: "Fortaleza - CE", font: .escavatorUI(.body2Regular))
 }
