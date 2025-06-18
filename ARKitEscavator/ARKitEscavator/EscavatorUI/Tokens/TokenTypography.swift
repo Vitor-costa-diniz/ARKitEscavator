@@ -12,6 +12,7 @@ struct TokenTypography {
         case medium = 20
         case large = 24
         case extraLarge = 28
+        case extraExtraExtraLarge = 55
     }
 
     fileprivate enum FontType: String {
@@ -26,6 +27,8 @@ enum TypographyCase {
     case body2Regular
     /// Font: LoveYaLikeASister-Regular; Size: 28
     case body3Regular
+    /// Font: LoveYaLikeASister-Regular; Size: 55
+    case body4Regular
 }
 
 extension Font {
@@ -37,6 +40,8 @@ extension Font {
             return Font.custom(TokenTypography.FontType.regular.rawValue, size: TokenTypography.FontSize.medium.rawValue)
         case .body3Regular:
             return Font.custom(TokenTypography.FontType.regular.rawValue, size: TokenTypography.FontSize.extraLarge.rawValue)
+        case .body4Regular:
+            return Font.custom(TokenTypography.FontType.regular.rawValue, size: TokenTypography.FontSize.extraExtraExtraLarge.rawValue)
         }
     }
 }
