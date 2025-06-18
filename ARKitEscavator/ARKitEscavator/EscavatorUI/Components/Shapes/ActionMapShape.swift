@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ActionMapShape: Shape {
+    var crackPosition: CrackPosition
+
     func path(in rect: CGRect) -> Path {
         let w = rect.width
         let h = rect.height
@@ -16,24 +18,31 @@ struct ActionMapShape: Shape {
         func py(_ y: CGFloat) -> CGFloat { y / 37 * h }
 
         var path = Path()
-        path.move(to: CGPoint(x: rect.minX, y: rect.minY))
-        
+        path.move(to: CGPoint(x: px(0), y: py(0)))
+
         // Top
         path.addLine(to: CGPoint(x: px(27), y: py(-1)))
         path.addLine(to: CGPoint(x: px(36), y: py(0)))
-        
+
         // Right
+        if crackPosition == .right {
+            path.addLine(to: CGPoint(x: px(36), y: py(11.5)))
+            path.addLine(to: CGPoint(x: px(33), y: py(14.5)))
+            path.addLine(to: CGPoint(x: px(36), y: py(18)))
+        }
         path.addLine(to: CGPoint(x: px(36), y: py(37)))
         path.addLine(to: CGPoint(x: px(24), y: py(36)))
-        
+
         // Bottom
         path.addLine(to: CGPoint(x: px(0), y: py(37)))
-        
+
         // Left
-        path.addLine(to: CGPoint(x: px(0), y: py(18)))
-        path.addLine(to: CGPoint(x: px(3), y: py(14.5)))
-        path.addLine(to: CGPoint(x: px(0), y: py(11.5)))
-        
+        if crackPosition == .left {
+            path.addLine(to: CGPoint(x: px(0), y: py(18)))
+            path.addLine(to: CGPoint(x: px(3), y: py(14.5)))
+            path.addLine(to: CGPoint(x: px(0), y: py(11.5)))
+        }
+
         path.closeSubpath()
         return path
     }
@@ -42,7 +51,11 @@ struct ActionMapShape: Shape {
 
 #Preview {
     VStack {
-        ActionMapShape()
+        ActionMapShape(crackPosition: .left)
             .frame(width: 36, height: 37)
     }
+}
+
+enum CrackPosition {
+    case left, right, bottom
 }
