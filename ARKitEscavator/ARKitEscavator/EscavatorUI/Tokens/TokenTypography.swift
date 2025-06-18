@@ -10,6 +10,7 @@ struct TokenTypography {
 
     fileprivate enum FontSize: CGFloat {
         case medium = 20
+        case large = 24
     }
 
     fileprivate enum FontType: String {
@@ -18,6 +19,8 @@ struct TokenTypography {
 }
 
 enum TypographyCase {
+    /// Font: LoveYaLikeASister-Regular; Size: 24
+    case body1Regular
     /// Font: LoveYaLikeASister-Regular; Size: 20
     case body2Regular
 }
@@ -25,6 +28,8 @@ enum TypographyCase {
 extension Font {
     static func escavatorUI(_ typographyCase: TypographyCase) -> Font {
         switch typographyCase {
+        case .body1Regular:
+            return Font.custom(TokenTypography.FontType.regular.rawValue, size: TokenTypography.FontSize.large.rawValue)
         case .body2Regular:
             return Font.custom(TokenTypography.FontType.regular.rawValue, size: TokenTypography.FontSize.medium.rawValue)
         }

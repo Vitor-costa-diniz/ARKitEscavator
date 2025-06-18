@@ -9,11 +9,10 @@ import SwiftUI
 
 struct LabelComponent: View {
     let text: String
-    let font: Font
     
     var body: some View {
         Text(text)
-            .font(font)
+            .font(.escavatorUI(.body2Regular))
             .foregroundStyle(.buttonIcon)
             .padding(.top, 5)
             .padding(.bottom, 3)
@@ -35,5 +34,5 @@ struct LabelComponent: View {
 }
 
 #Preview {
-    LabelComponent(text: "Fortaleza - CE", font: .escavatorUI(.body2Regular))
+    LabelComponent(text: "Fortaleza - CE")
 }
