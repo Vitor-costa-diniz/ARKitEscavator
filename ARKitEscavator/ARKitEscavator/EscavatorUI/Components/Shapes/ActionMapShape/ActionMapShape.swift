@@ -5,6 +5,10 @@
 //  Created by Vitor Costa on 18/06/25.
 //
 
+enum CrackPosition {
+    case left, right, bottom
+}
+
 import SwiftUI
 
 struct ActionMapShape: Shape {
@@ -25,8 +29,4 @@ struct ActionMapShape: Shape {
         ActionMapShape(crackPosition: .bottom)
             .frame(width: 36, height: 37)
     }
-}
-
-enum CrackPosition {
-    case left, right, bottom
 }
