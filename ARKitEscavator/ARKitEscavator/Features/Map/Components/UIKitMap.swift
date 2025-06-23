@@ -20,6 +20,8 @@ struct UIKitMap: UIViewRepresentable {
         mapView.userTrackingMode = .follow
         mapView.showsCompass = false
         
+        viewModel.mapView = mapView
+        
         return mapView
     }
     

@@ -14,6 +14,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     static let shared: LocationManager = LocationManager()
     @Published var userLocation: CLLocationCoordinate2D?
     
+    weak var delegate: LocationManagerDelegate?
     private var monitoredSites: [EscavationSite] = [.init()]
     private var radius: Double = 10
     private var onEnterRegion: ((EscavationSite) -> Void)?
@@ -61,6 +62,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         if let location = locations.first {
             DispatchQueue.main.async {
                 self.userLocation = location.coordinate
+                self.delegate?.didUpdateUserLocation(location.coordinate)
             }
         }
     }
@@ -103,4 +105,8 @@ extension LocationManager {
             break
         }
     }
+}
+
+protocol LocationManagerDelegate: AnyObject {
+    func didUpdateUserLocation(_ coordinate: CLLocationCoordinate2D)
 }

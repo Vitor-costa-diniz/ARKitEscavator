@@ -26,7 +26,7 @@ struct MapView: View {
     private var mapInformationAction: some View {
         VStack {
             HStack(alignment: .firstTextBaseline) {
-                LabelComponent(text: "Fortaleza - CE")
+                LabelComponent(text: viewModel.userLocation)
                 
                 Spacer()
                 
@@ -37,7 +37,9 @@ struct MapView: View {
                         viewModel.centeredMapOnUser = true
                     }
                     
-                    ActionMapButton(icon: .locationNorth) {}
+                    ActionMapButton(icon: .locationNorth) {
+                        viewModel.resetHeadingToNorth()
+                    }
                 }
             }
             
