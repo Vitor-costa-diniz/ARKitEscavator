@@ -67,6 +67,23 @@ struct UIKitMap: UIViewRepresentable {
             }
             return MKOverlayRenderer(overlay: overlay)
         }
+        
+        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+            let identifier = "customPin"
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            
+            if annotationView == nil {
+                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                annotationView?.canShowCallout = false
+                annotationView?.image = UIImage(resource: .mapPin)
+                annotationView?.centerOffset = CGPoint(x: 0, y:  -annotationView!.frame.height / 3)
+            } else {
+                annotationView?.annotation = annotation
+                annotationView?.image = UIImage(resource: .mapPin)
+            }
+            
+            return annotationView
+        }
     }
 }
 
