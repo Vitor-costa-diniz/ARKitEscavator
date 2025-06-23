@@ -10,6 +10,7 @@ import Foundation
 final class MapViewModel: ObservableObject {
     private var locationManager: LocationManager = LocationManager.shared
     var escavationSites: [MajorEscavationSite] = [.init()]
+    @Published var centeredMapOnUser: Bool = true
     @Published var radius: Double = 30
     
     func monitoringRegion() {
