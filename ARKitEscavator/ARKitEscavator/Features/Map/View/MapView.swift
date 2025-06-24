@@ -31,7 +31,7 @@ struct MapView: View {
                 Spacer()
                 
                 VStack(spacing: 8) {
-                    ActionMapButton(icon: .info) {}
+                    ActionMapButton(icon: .menu) {}
                     
                     ActionMapButton(icon: .location) {
                         viewModel.centerMapOnUser()
