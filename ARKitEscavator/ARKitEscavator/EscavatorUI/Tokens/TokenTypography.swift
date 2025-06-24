@@ -9,6 +9,7 @@ import SwiftUI
 struct TokenTypography {
 
     fileprivate enum FontSize: CGFloat {
+        case small = 12
         case medium = 20
         case large = 24
         case extraLarge = 28
@@ -17,6 +18,7 @@ struct TokenTypography {
 
     fileprivate enum FontType: String {
         case regular = "LoveYaLikeASister-Regular"
+        case boldManjari = "Manjari-Bold"
     }
 }
 
@@ -29,6 +31,8 @@ enum TypographyCase {
     case body3Regular
     /// Font: LoveYaLikeASister-Regular; Size: 55
     case body4Regular
+    /// Font: Manjari-Bold; Size: 12
+    case headingManjari5
 }
 
 extension Font {
@@ -42,6 +46,8 @@ extension Font {
             return Font.custom(TokenTypography.FontType.regular.rawValue, size: TokenTypography.FontSize.extraLarge.rawValue)
         case .body4Regular:
             return Font.custom(TokenTypography.FontType.regular.rawValue, size: TokenTypography.FontSize.extraExtraExtraLarge.rawValue)
+        case .headingManjari5:
+            return Font.custom(TokenTypography.FontType.boldManjari.rawValue, size: TokenTypography.FontSize.small.rawValue)
         }
     }
 }
