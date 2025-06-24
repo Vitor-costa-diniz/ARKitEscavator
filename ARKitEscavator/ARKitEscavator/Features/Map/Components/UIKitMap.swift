@@ -49,7 +49,7 @@ struct UIKitMap: UIViewRepresentable {
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             if let circleOverlay = overlay as? MKCircle {
                 let renderer = MKCircleRenderer(circle: circleOverlay)
-                renderer.fillColor = UIColor.systemRed.withAlphaComponent(0.2)
+                renderer.fillColor = UIColor.systemBrown.withAlphaComponent(0.2)
                 renderer.strokeColor = UIColor(resource: .mapBorderRadius)
                 renderer.lineWidth = 1
                 return renderer
