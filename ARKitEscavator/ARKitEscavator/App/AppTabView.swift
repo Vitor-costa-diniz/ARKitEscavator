@@ -25,8 +25,8 @@ struct AppTabView: View {
             }
             
             CustomTabBar(selection: $tabSelection)
+                .tint(.buttonIcon)
         }
-        .tint(.buttonIcon)
     }
 }
 

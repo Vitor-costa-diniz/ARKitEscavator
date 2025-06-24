@@ -38,7 +38,7 @@ struct CustomTabBar: View {
                     Spacer()
                     
                     VStack(spacing: 6) {
-                        Image(systemName: "backpack")
+                        Image(systemName: selection == 1 ? "backpack.fill" : "backpack")
                             .font(.system(size: 22))
                         
                         Text("Coleção")
