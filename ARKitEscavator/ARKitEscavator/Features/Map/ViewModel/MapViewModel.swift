@@ -44,6 +44,10 @@ final class MapViewModel: ObservableObject, LocationManagerDelegate {
             getCityAndState(from: coordinate)
         }
     }
+    
+    func centerMapOnUser() {
+        mapView?.setUserTrackingMode(.follow, animated: true)
+    }
 }
 
 // MARK: Private funcs

@@ -34,7 +34,7 @@ struct MapView: View {
                     ActionMapButton(icon: .info) {}
                     
                     ActionMapButton(icon: .location) {
-                        viewModel.centeredMapOnUser = true
+                        viewModel.centerMapOnUser()
                     }
                     
                     ActionMapButton(icon: .locationNorth) {

@@ -39,19 +39,6 @@ struct UIKitMap: UIViewRepresentable {
                 }
             }
         }
-        
-        if viewModel.centeredMapOnUser {
-            if let userLocation = uiView.userLocation.location?.coordinate {
-                let region = MKCoordinateRegion(
-                    center: userLocation,
-                    span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-                )
-                uiView.setRegion(region, animated: true)
-                DispatchQueue.main.async {
-                    viewModel.centeredMapOnUser = false
-                }
-            }
-        }
     }
     
     func makeCoordinator() -> Coordinator {
