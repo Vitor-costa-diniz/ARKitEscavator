@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct MapView: View {
     @EnvironmentObject private var viewModel: MapViewModel
     @State private var selectedSite: EscavationSite?
     @State private var showAR = false
+    @State private var showCameraPermissionAlert = false
 
     var body: some View {
         ZStack {
@@ -24,11 +26,13 @@ struct MapView: View {
             )
             .ignoresSafeArea()
         }
-        .fullScreenCover(isPresented: $showAR) {
-            if let site = selectedSite {
+        .fullScreenCover(item: $viewModel.selectedSite, content: { _ in
+            if let site = viewModel.selectedSite {
                 ARExperienceView(site: site)
+            } else {
+                Text("teste")
             }
-        }
+        })
         .onAppear {
             viewModel.monitoringRegion()
         }

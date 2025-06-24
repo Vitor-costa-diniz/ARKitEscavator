@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FEBB15C12E08C4B5008F3003 /* ARKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEBB15C02E08C4B5008F3003 /* ARKit.framework */; };
-		FEBB15C32E08C4BC008F3003 /* RealityKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEBB15C22E08C4BC008F3003 /* RealityKit.framework */; };
+		FEA0B1C52E0ACD84008524B9 /* ARKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEBB15C02E08C4B5008F3003 /* ARKit.framework */; };
+		FEA0B1C82E0ACD85008524B9 /* RealityKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEBB15C22E08C4BC008F3003 /* RealityKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,8 +43,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FEBB15C32E08C4BC008F3003 /* RealityKit.framework in Frameworks */,
-				FEBB15C12E08C4B5008F3003 /* ARKit.framework in Frameworks */,
+				FEA0B1C82E0ACD85008524B9 /* RealityKit.framework in Frameworks */,
+				FEA0B1C52E0ACD84008524B9 /* ARKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +296,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 18;
@@ -330,6 +331,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 18;

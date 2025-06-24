@@ -21,11 +21,11 @@ struct MajorEscavationSite {
     init() {
         self.id = UUID()
         title = "Apple Developer Academy"
-        self.escavations = [.init(title: "Sala 05", coordinates: CLLocationCoordinate2D(latitude: -3.7963256157615852, longitude: -38.56490303605502))]
+        self.escavations = [.init(title: "Sala 05", coordinates: CLLocationCoordinate2D(latitude: -3.744459241140999, longitude: -38.53652440961214))]
     }
 }
 
-struct EscavationSite {
+struct EscavationSite: Identifiable {
     let id: UUID
     let title: String
     let coordinates: CLLocationCoordinate2D

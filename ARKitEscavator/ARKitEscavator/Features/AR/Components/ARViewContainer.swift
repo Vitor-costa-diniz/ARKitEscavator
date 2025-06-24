@@ -48,7 +48,7 @@ struct ARViewContainer: UIViewRepresentable {
 //            let anchor = AnchorEntity(world: offset)
 
             do {
-                let modelEntity = try Entity.loadModel(named: "Livro")
+                let modelEntity = try Entity.loadModel(named: "uvmaps")
                 modelEntity.scale = [0.1, 0.1, 0.1]
                 modelEntity.name = "interactiveModel"
                 modelEntity.generateCollisionShapes(recursive: true)
