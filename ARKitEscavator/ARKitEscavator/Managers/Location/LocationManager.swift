@@ -79,7 +79,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Erro ao obter localização: \(error.localizedDescription)")
+        print("Error to get user location: \(error.localizedDescription)")
     }
 }
 
@@ -105,8 +105,4 @@ extension LocationManager {
             break
         }
     }
-}
-
-protocol LocationManagerDelegate: AnyObject {
-    func didUpdateUserLocation(_ coordinate: CLLocationCoordinate2D)
 }
