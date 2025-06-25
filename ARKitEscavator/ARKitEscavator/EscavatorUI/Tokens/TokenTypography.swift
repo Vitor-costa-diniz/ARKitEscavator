@@ -10,6 +10,7 @@ struct TokenTypography {
 
     fileprivate enum FontSize: CGFloat {
         case small = 12
+        case smallMedium = 17
         case medium = 20
         case large = 24
         case extraLarge = 28
@@ -19,6 +20,7 @@ struct TokenTypography {
     fileprivate enum FontType: String {
         case regular = "LoveYaLikeASister-Regular"
         case boldManjari = "Manjari-Bold"
+        case regularManjari = "Manjari-Regular"
     }
 }
 
@@ -33,6 +35,8 @@ enum TypographyCase {
     case body4Regular
     /// Font: Manjari-Bold; Size: 12
     case headingManjari5
+    /// Font: Manjari-Regular; Size: 12
+    case bodyManjari4
 }
 
 extension Font {
@@ -48,6 +52,8 @@ extension Font {
             return Font.custom(TokenTypography.FontType.regular.rawValue, size: TokenTypography.FontSize.extraExtraExtraLarge.rawValue)
         case .headingManjari5:
             return Font.custom(TokenTypography.FontType.boldManjari.rawValue, size: TokenTypography.FontSize.small.rawValue)
+        case .bodyManjari4:
+            return Font.custom(TokenTypography.FontType.regularManjari.rawValue, size: TokenTypography.FontSize.smallMedium.rawValue)
         }
     }
 }

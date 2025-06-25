@@ -74,11 +74,11 @@ struct EscavationPoint: Decodable {
     
     init() {
         self.id = 1
-        self.name = "Relógio da praça do Ferreira"
-        self.shortDescription = "Relógio histórico no centro da praça."
+        self.name = "Relógio da Praça do Ferreira"
+        self.shortDescription = "O relógio da Praça do Ferreira é um dos símbolos mais conhecidos de Fortaleza, instalado em 1933."
         self.longDescription = "Estrutura erguida no século XX como símbolo da modernização urbana da cidade. O relógio da Praça do Ferreira é um marco arquitetônico de grande importância cultural."
         self.object3DModel = "relogio_ferreira_3d.usdz"
-        self.objectImage = "relogio_ferreira_img.jpg"
+        self.objectImage = "RelogioPracaFerreira"
         self.address = "R. Floriano Peixoto - Centro, Fortaleza - CE."
         self.escavated = false
         self.coordinates = CLLocationCoordinate2D(latitude: -3.7304, longitude: -38.5210)
