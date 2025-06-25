@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum ActionIcon: String {
-    case info = "info.circle"
+    case menu = "list.bullet"
     case location = "location"
     case locationNorth = "location.north.line"
 }
@@ -18,7 +18,7 @@ struct ActionMapButton: View {
     let action: () -> Void
     private var position: CrackPosition {
         switch icon {
-        case .info:
+        case .menu:
             return .left
         case .location:
             return .right

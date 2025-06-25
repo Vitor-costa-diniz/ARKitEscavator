@@ -12,11 +12,38 @@ struct MapView: View {
     
     var body: some View {
         ZStack {
-            UIKitMap(majorSites: [.init()], radius: viewModel.radius)
+            UIKitMap(majorSites: [.init()], viewModel: viewModel)
                 .ignoresSafeArea()
+            
+            mapInformationAction
+                .padding(EdgeInsets(top: 8, leading: 25, bottom: 0, trailing: 20))
         }
         .onAppear {
             viewModel.monitoringRegion()
+        }
+    }
+    
+    private var mapInformationAction: some View {
+        VStack {
+            HStack(alignment: .firstTextBaseline) {
+                LabelComponent(text: viewModel.userLocation)
+                
+                Spacer()
+                
+                VStack(spacing: 8) {
+                    ActionMapButton(icon: .menu) {}
+                    
+                    ActionMapButton(icon: .location) {
+                        viewModel.centerMapOnUser()
+                    }
+                    
+                    ActionMapButton(icon: .locationNorth) {
+                        viewModel.resetHeadingToNorth()
+                    }
+                }
+            }
+            
+            Spacer()
         }
     }
 }
