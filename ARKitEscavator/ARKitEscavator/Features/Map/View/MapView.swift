@@ -12,7 +12,7 @@ struct MapView: View {
     
     var body: some View {
         ZStack {
-            UIKitMap(majorSites: [.init()], viewModel: viewModel)
+            UIKitMap(majorSites: viewModel.escavationSites, viewModel: viewModel)
                 .ignoresSafeArea()
             
             mapInformationAction

@@ -11,7 +11,7 @@ import CoreLocation
 
 final class MapViewModel: ObservableObject, LocationManagerDelegate {
     private var locationManager: LocationManager = LocationManager.shared
-    var escavationSites: [MajorEscavationSite] = [.init()]
+    var escavationSites: [MajorSite] = MajorSite.loadAllMajorSites()
     weak var mapView: MKMapView?
     @Published var centeredMapOnUser: Bool = true
     @Published var radius: Double = 30
@@ -23,7 +23,7 @@ final class MapViewModel: ObservableObject, LocationManagerDelegate {
     
     func monitoringRegion() {
         locationManager.monitoringRegion(points: escavationSites, radius: radius) { point in
-            print("Entrou no raio de: \(point.title)")
+            print("Entrou no raio de: \(point.name)")
         }
     }
     

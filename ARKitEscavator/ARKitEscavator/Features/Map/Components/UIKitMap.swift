@@ -9,7 +9,7 @@ import SwiftUI
 import MapKit
 
 struct UIKitMap: UIViewRepresentable {
-    let majorSites: [MajorEscavationSite]
+    let majorSites: [MajorSite]
     @StateObject var viewModel: MapViewModel
     
     func makeUIView(context: Context) -> MKMapView {
@@ -28,9 +28,9 @@ struct UIKitMap: UIViewRepresentable {
     func updateUIView(_ uiView: MKMapView, context: Context) {
         if uiView.annotations.isEmpty {
             for escavation in majorSites {
-                escavation.escavations.forEach {
+                escavation.escavationPoints.forEach {
                     let point = MKPointAnnotation()
-                    point.title = $0.title
+                    point.title = $0.name
                     point.coordinate = $0.coordinates
                     uiView.addAnnotation(point)
                     
