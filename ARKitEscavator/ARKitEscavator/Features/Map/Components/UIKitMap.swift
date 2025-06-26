@@ -10,8 +10,13 @@ import MapKit
 
 struct UIKitMap: UIViewRepresentable {
     let majorSites: [MajorEscavationSite]
+
     let radius: Double
     let onSelectSite: (EscavationSite) -> Void
+
+
+    @StateObject var viewModel: MapViewModel
+    
 
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
@@ -19,10 +24,15 @@ struct UIKitMap: UIViewRepresentable {
         mapView.delegate = context.coordinator
         mapView.mapType = .mutedStandard
         mapView.userTrackingMode = .follow
+        mapView.showsCompass = false
+        
+        viewModel.mapView = mapView
+        
         return mapView
     }
 
     func updateUIView(_ uiView: MKMapView, context: Context) {
+
         uiView.removeAnnotations(uiView.annotations)
         uiView.removeOverlays(uiView.overlays)
 
@@ -35,6 +45,19 @@ struct UIKitMap: UIViewRepresentable {
 
                 let circle = MKCircle(center: site.coordinates, radius: radius)
                 uiView.addOverlay(circle)
+
+//         if uiView.annotations.isEmpty {
+//             for escavation in majorSites {
+//                 escavation.escavations.forEach {
+//                     let point = MKPointAnnotation()
+//                     point.title = $0.title
+//                     point.coordinate = $0.coordinates
+//                     uiView.addAnnotation(point)
+                    
+//                     let circle = MKCircle(center: $0.coordinates, radius: viewModel.radius)
+//                     uiView.addOverlay(circle)
+//                 }
+
             }
         }
     }
@@ -42,6 +65,7 @@ struct UIKitMap: UIViewRepresentable {
     func makeCoordinator() -> Coordinator {
         Coordinator(majorSites: majorSites, onSelectSite: onSelectSite)
     }
+
 
     class Coordinator: NSObject, MKMapViewDelegate {
         private let sites: [EscavationSite]
@@ -73,9 +97,31 @@ struct UIKitMap: UIViewRepresentable {
                 renderer.fillColor   = UIColor.systemRed.withAlphaComponent(0.2)
                 renderer.strokeColor = UIColor.systemRed
                 renderer.lineWidth   = 1
+
                 return renderer
             }
             return MKOverlayRenderer(overlay: overlay)
+        }
+        
+        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+            if annotation is MKUserLocation {
+                return nil
+            }
+            
+            let identifier = "customPin"
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            
+            if annotationView == nil {
+                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                annotationView?.canShowCallout = false
+                annotationView?.image = UIImage(resource: .mapPin)
+                annotationView?.centerOffset = CGPoint(x: 0, y:  -annotationView!.frame.height / 3)
+            } else {
+                annotationView?.annotation = annotation
+                annotationView?.image = UIImage(resource: .mapPin)
+            }
+            
+            return annotationView
         }
     }
 }

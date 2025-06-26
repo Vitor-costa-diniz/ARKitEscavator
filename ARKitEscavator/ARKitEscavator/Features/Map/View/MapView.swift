@@ -16,6 +16,7 @@ struct MapView: View {
 
     var body: some View {
         ZStack {
+<<<<<<< feature/ObjectsPosition
             UIKitMap(
                 majorSites: viewModel.escavationSites,
                 radius: viewModel.radius,
@@ -27,10 +28,41 @@ struct MapView: View {
         }
         .fullScreenCover(item: $selectedSite) { site in
             ARExperienceView(site: site)
+=======
+            UIKitMap(majorSites: [.init()], viewModel: viewModel)
+                .ignoresSafeArea()
+            
+            mapInformationAction
+                .padding(EdgeInsets(top: 8, leading: 25, bottom: 0, trailing: 20))
+>>>>>>> main
         }
         .onAppear {
             viewModel.monitoringRegion()
             //viewModel.selectedSite
+        }
+    }
+    
+    private var mapInformationAction: some View {
+        VStack {
+            HStack(alignment: .firstTextBaseline) {
+                LabelComponent(text: viewModel.userLocation)
+                
+                Spacer()
+                
+                VStack(spacing: 8) {
+                    ActionMapButton(icon: .menu) {}
+                    
+                    ActionMapButton(icon: .location) {
+                        viewModel.centerMapOnUser()
+                    }
+                    
+                    ActionMapButton(icon: .locationNorth) {
+                        viewModel.resetHeadingToNorth()
+                    }
+                }
+            }
+            
+            Spacer()
         }
     }
 }

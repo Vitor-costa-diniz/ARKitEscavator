@@ -5,6 +5,9 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>LoveYaLikeASister-Regular.ttf</string>
+		<string>Manjari-Regular.ttf</string>
+		<string>Manjari-Thin.ttf</string>
+		<string>Manjari-Bold.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
