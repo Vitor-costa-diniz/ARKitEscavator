@@ -13,73 +13,76 @@ struct EscavationPointSheet: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Image(.simpleFrame)
-                .overlay {
-                    Image(escavationPoint.objectImage)
-                }
-                .padding(.bottom, 16)
             
-            Group {
-                Text(escavationPoint.name)
-                    .font(.escavatorUI(.body1Regular))
-                    .padding(.bottom, 7)
+            VStack(alignment: .leading, spacing: 0) {
+                Image(.simpleFrame)
+                    .overlay {
+                        Image(escavationPoint.objectImage)
+                    }
+                    .padding(.bottom, 16)
                 
-                Text("\(escavationPoint.address)\n")
-                    .font(.escavatorUI(.bodyManjari4))
+                Group {
+                    Text(escavationPoint.name)
+                        .font(.escavatorUI(.body1Regular))
+                        .padding(.bottom, 7)
+                    
+                    Text("\(escavationPoint.address)\n")
+                        .font(.escavatorUI(.bodyManjari4))
+                    
+                    Text("\(escavationPoint.shortDescription)")
+                        .font(.escavatorUI(.bodyManjari4))
+                }
+                .fixedSize(horizontal: false, vertical: true)
+                .foregroundStyle(.text)
                 
-                Text("\(escavationPoint.shortDescription)")
-                    .font(.escavatorUI(.bodyManjari4))
-            }
-            .fixedSize(horizontal: false, vertical: true)
-            .foregroundStyle(.text)
-            
-            Button {} label: {
-                HStack(alignment: .firstTextBaseline, spacing: 10) {
-                    Spacer()
-                    
-                    Image(.shovel)
-                        .offset(y: 4)
-                    Text("Escavar")
-                        .font(.escavatorUI(.headingManjari3))
-                    
-                    Spacer()
+                Button {} label: {
+                    HStack(alignment: .firstTextBaseline, spacing: 10) {
+                        Spacer()
+                        
+                        Image(.shovel)
+                            .offset(y: 4)
+                        Text("Escavar")
+                            .font(.escavatorUI(.headingManjari3))
+                        
+                        Spacer()
+                    }
+                    .foregroundStyle(Color.buttonText)
+                    .padding(.vertical, 11)
+                    .background {
+                        Color.blueBackground
+                            .clipShape(.rect(cornerRadius: 6))
+                    }
                 }
-                .foregroundStyle(Color.buttonText)
-                .padding(.vertical, 11)
-                .background {
-                    Color.blueBackground
-                        .clipShape(.rect(cornerRadius: 6))
-                }
-            }
-            .padding(.top, 25)
-            .padding(.bottom, 2.7)
-            
-            Button {} label: {
-                HStack(alignment: .firstTextBaseline, spacing: 10) {
-                    Spacer()
-                    
-                    Image(systemName: "mappin.and.ellipse")
-                    Text("Navegar")
-                    
-                    Spacer()
-                }
-                .font(.escavatorUI(.headingManjari3))
-                .foregroundStyle(Color.buttonText)
-                .padding(.vertical, 11)
-                .background {
-                    Color.greenBackground
-                        .clipShape(.rect(cornerRadius: 6))
+                .padding(.top, 25)
+                .padding(.bottom, 2.7)
+                
+                Button {} label: {
+                    HStack(alignment: .firstTextBaseline, spacing: 10) {
+                        Spacer()
+                        
+                        Image(systemName: "mappin.and.ellipse")
+                        Text("Navegar")
+                        
+                        Spacer()
+                    }
+                    .font(.escavatorUI(.headingManjari3))
+                    .foregroundStyle(Color.buttonText)
+                    .padding(.vertical, 11)
+                    .background {
+                        Color.greenBackground
+                            .clipShape(.rect(cornerRadius: 6))
+                    }
                 }
             }
+            .dynamicSheetHeight(into: $sheetHeight)
             
             Spacer()
         }
-        .dynamicSheetHeight(into: $sheetHeight)
         .padding(.top, 40)
         .padding(.horizontal, 20)
         .presentationDragIndicator(.visible)
         .presentationCornerRadius(0)
-        .presentationDetents([.height(sheetHeight + 39)])
+        .presentationDetents([.height(sheetHeight + 50)])
         .presentationBackground {
             SheetShape()
                 .fill(Color(.buttonOverlay))

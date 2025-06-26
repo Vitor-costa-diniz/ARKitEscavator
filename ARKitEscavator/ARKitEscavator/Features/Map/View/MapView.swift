@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MapView: View {
     @EnvironmentObject private var viewModel: MapViewModel
+    @State private var showSheet: Bool = false
     
     var body: some View {
         ZStack {
@@ -18,6 +19,9 @@ struct MapView: View {
             mapInformationAction
                 .padding(EdgeInsets(top: 8, leading: 25, bottom: 0, trailing: 20))
         }
+        .sheet(isPresented: $showSheet, content: {
+            EscavationPointSheet(escavationPoint: .init())
+        })
         .onAppear {
             viewModel.monitoringRegion()
         }
