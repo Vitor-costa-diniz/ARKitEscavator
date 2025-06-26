@@ -26,7 +26,7 @@ struct EscavationPointSheet: View {
                 Text("\(escavationPoint.address)\n")
                     .font(.escavatorUI(.bodyManjari4))
                 
-                Text(escavationPoint.shortDescription)
+                Text("\(escavationPoint.shortDescription)\n")
                     .font(.escavatorUI(.bodyManjari4))
             }
             .foregroundStyle(.text)
