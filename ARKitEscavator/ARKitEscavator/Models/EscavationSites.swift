@@ -35,7 +35,7 @@ struct MajorSite: Decodable {
     }
 }
 
-struct EscavationPoint: Decodable, Identifiable {
+struct EscavationPoint: Decodable, Identifiable, Equatable {
     let id: Int
     let name: String
     let shortDescription: String
@@ -82,6 +82,10 @@ struct EscavationPoint: Decodable, Identifiable {
         self.address = "R. Floriano Peixoto - Centro, Fortaleza - CE."
         self.escavated = false
         self.coordinates = CLLocationCoordinate2D(latitude: -3.7304, longitude: -38.5210)
+    }
+    
+    static func == (lhs: EscavationPoint, rhs: EscavationPoint) -> Bool {
+        lhs.id == rhs.id
     }
 }
 

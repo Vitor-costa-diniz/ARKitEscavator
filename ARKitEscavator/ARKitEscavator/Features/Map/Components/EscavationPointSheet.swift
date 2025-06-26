@@ -36,7 +36,9 @@ struct EscavationPointSheet: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .foregroundStyle(.text)
                 
-                Button {} label: {
+                Button {
+                    // Função para abrir parte de realidade aumentada
+                } label: {
                     HStack(alignment: .firstTextBaseline, spacing: 10) {
                         Spacer()
                         
@@ -52,12 +54,13 @@ struct EscavationPointSheet: View {
                     .foregroundStyle(Color.buttonText)
                     .padding(.vertical, 11)
                     .background {
-                        Color.blueBackground
+                        (viewModel.canEscavate() ? Color.blueBackground : Color.gray.opacity(0.5))
                             .clipShape(.rect(cornerRadius: 6))
                     }
                 }
                 .padding(.top, 25)
                 .padding(.bottom, 2.7)
+                .disabled(!viewModel.canEscavate())
                 
                 Button {} label: {
                     HStack(alignment: .firstTextBaseline, spacing: 10) {

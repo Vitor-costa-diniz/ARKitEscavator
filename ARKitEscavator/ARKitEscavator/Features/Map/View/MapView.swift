@@ -23,7 +23,7 @@ struct MapView: View {
         }
         .sheet(item: $viewModel.selectedPoint, onDismiss: {
             viewModel.selectedPoint = nil
-        }, content: { point in
+        }, content: { _ in
             EscavationPointSheet(viewModel: viewModel)
         })
         .onAppear {

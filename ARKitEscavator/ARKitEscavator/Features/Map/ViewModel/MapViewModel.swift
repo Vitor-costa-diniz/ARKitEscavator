@@ -16,8 +16,8 @@ final class MapViewModel: ObservableObject, LocationManagerDelegate {
     @Published var centeredMapOnUser: Bool = true
     @Published var radius: Double = 30
     @Published var userLocation: String = "Carregando..."
-    @Published var selectedPoint: EscavationPoint?
-    @Published var pointInRegeion: EscavationPoint?
+    @Published var selectedPoint: EscavationPoint? = .init()
+    @Published var pointInRegion: EscavationPoint?
     
     init() {
         locationManager.delegate = self
@@ -25,7 +25,7 @@ final class MapViewModel: ObservableObject, LocationManagerDelegate {
     
     func monitoringRegion() {
         locationManager.monitoringRegion(points: escavationSites, radius: radius) { point in
-            self.pointInRegeion = point
+            self.pointInRegion = point
         }
     }
     
@@ -49,6 +49,10 @@ final class MapViewModel: ObservableObject, LocationManagerDelegate {
     
     func centerMapOnUser() {
         mapView?.setUserTrackingMode(.follow, animated: true)
+    }
+    
+    func canEscavate() -> Bool {
+        return self.selectedPoint == self.pointInRegion
     }
 }
 
