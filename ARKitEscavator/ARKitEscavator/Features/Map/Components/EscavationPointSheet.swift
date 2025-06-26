@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct EscavationPointSheet: View {
+    @State private var sheetHeight: CGFloat = 0
     let escavationPoint: EscavationPoint
     
     var body: some View {
@@ -25,12 +26,11 @@ struct EscavationPointSheet: View {
                 
                 Text("\(escavationPoint.address)\n")
                     .font(.escavatorUI(.bodyManjari4))
-                    .padding(.bottom, 17)
                 
                 Text("\(escavationPoint.shortDescription)")
                     .font(.escavatorUI(.bodyManjari4))
-                    .fixedSize(horizontal: false, vertical: true)
             }
+            .fixedSize(horizontal: false, vertical: true)
             .foregroundStyle(.text)
             
             Button {} label: {
@@ -74,11 +74,12 @@ struct EscavationPointSheet: View {
             
             Spacer()
         }
+        .dynamicSheetHeight(into: $sheetHeight)
         .padding(.top, 40)
         .padding(.horizontal, 20)
-        .presentationDetents([.fraction(0.69)])
         .presentationDragIndicator(.visible)
         .presentationCornerRadius(0)
+        .presentationDetents([.height(sheetHeight + 39)])
         .presentationBackground {
             SheetShape()
                 .fill(Color(.buttonOverlay))
