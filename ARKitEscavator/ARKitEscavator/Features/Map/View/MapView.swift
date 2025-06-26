@@ -11,7 +11,7 @@ import AVFoundation
 struct MapView: View {
     @EnvironmentObject private var viewModel: MapViewModel
     @State private var selectedSite: EscavationSite?
-    @State private var showAR = false
+    // @State private var showAR = false
     @State private var showCameraPermissionAlert = false
 
     var body: some View {
@@ -21,20 +21,16 @@ struct MapView: View {
                 radius: viewModel.radius,
                 onSelectSite: { site in
                     selectedSite = site
-                    showAR = true
                 }
             )
             .ignoresSafeArea()
         }
-        .fullScreenCover(item: $viewModel.selectedSite, content: { _ in
-            if let site = viewModel.selectedSite {
-                ARExperienceView(site: site)
-            } else {
-                Text("teste")
-            }
-        })
+        .fullScreenCover(item: $selectedSite) { site in
+            ARExperienceView(site: site)
+        }
         .onAppear {
             viewModel.monitoringRegion()
+            //viewModel.selectedSite
         }
     }
 }
