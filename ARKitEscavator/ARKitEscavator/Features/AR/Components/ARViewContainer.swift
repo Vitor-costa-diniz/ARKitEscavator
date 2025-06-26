@@ -11,7 +11,7 @@ import ARKit
 import CoreLocation
 
 struct ARViewContainer: UIViewRepresentable {
-    let site: EscavationSite
+    let site: EscavationPoint
 
     func makeUIView(context: Context) -> ARView {
         let arView = ARView(frame: .zero)

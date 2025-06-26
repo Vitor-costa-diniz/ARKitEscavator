@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ARExperienceView: View {
     @Environment(\.presentationMode) private var presentationMode
-    let site: EscavationSite
+    let site: EscavationPoint
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
