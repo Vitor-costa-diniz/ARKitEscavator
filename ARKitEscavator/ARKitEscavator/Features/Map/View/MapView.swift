@@ -6,17 +6,30 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct MapView: View {
     @EnvironmentObject private var viewModel: MapViewModel
-    
+    @State private var selectedSite: EscavationSite?
+    @State private var showCameraPermissionAlert = false
+
     var body: some View {
         ZStack {
-            UIKitMap(majorSites: [.init()], viewModel: viewModel)
-                .ignoresSafeArea()
+            UIKitMap(
+                majorSites: viewModel.escavationSites,
+                radius: viewModel.radius,
+                onSelectSite: { site in
+                    selectedSite = site
+                },
+                viewModel: viewModel
+            )
+            .ignoresSafeArea()
             
             mapInformationAction
                 .padding(EdgeInsets(top: 8, leading: 25, bottom: 0, trailing: 20))
+        }
+        .fullScreenCover(item: $selectedSite) { site in
+            ARExperienceView(site: site)
         }
         .onAppear {
             viewModel.monitoringRegion()

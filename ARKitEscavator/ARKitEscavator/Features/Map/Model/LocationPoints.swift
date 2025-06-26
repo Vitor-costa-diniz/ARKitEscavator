@@ -25,7 +25,7 @@ struct MajorEscavationSite {
     }
 }
 
-struct EscavationSite {
+struct EscavationSite: Identifiable {
     let id: UUID
     let title: String
     let coordinates: CLLocationCoordinate2D

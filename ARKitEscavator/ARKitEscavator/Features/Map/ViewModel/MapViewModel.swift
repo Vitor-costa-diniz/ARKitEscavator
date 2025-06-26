@@ -15,6 +15,7 @@ final class MapViewModel: ObservableObject, LocationManagerDelegate {
     weak var mapView: MKMapView?
     @Published var centeredMapOnUser: Bool = true
     @Published var radius: Double = 30
+    @Published var selectedSite: EscavationSite?
     @Published var userLocation: String = "Carregando..."
     
     init() {
@@ -23,7 +24,7 @@ final class MapViewModel: ObservableObject, LocationManagerDelegate {
     
     func monitoringRegion() {
         locationManager.monitoringRegion(points: escavationSites, radius: radius) { point in
-            print("Entrou no raio de: \(point.title)")
+            self.selectedSite = point
         }
     }
     

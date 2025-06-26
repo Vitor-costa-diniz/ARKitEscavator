@@ -6,8 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		FEA0B1C52E0ACD84008524B9 /* ARKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEBB15C02E08C4B5008F3003 /* ARKit.framework */; };
+		FEA0B1C82E0ACD85008524B9 /* RealityKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEBB15C22E08C4BC008F3003 /* RealityKit.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		4AA291302DFB0D6100C1E2BB /* ARKitEscavator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARKitEscavator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FEBB15C02E08C4B5008F3003 /* ARKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARKit.framework; path = System/Library/Frameworks/ARKit.framework; sourceTree = SDKROOT; };
+		FEBB15C22E08C4BC008F3003 /* RealityKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealityKit.framework; path = System/Library/Frameworks/RealityKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -36,6 +43,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEA0B1C82E0ACD85008524B9 /* RealityKit.framework in Frameworks */,
+				FEA0B1C52E0ACD84008524B9 /* ARKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				4AA291322DFB0D6100C1E2BB /* ARKitEscavator */,
+				FEBB15BF2E08C4B5008F3003 /* Frameworks */,
 				4AA291312DFB0D6100C1E2BB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,6 +66,15 @@
 				4AA291302DFB0D6100C1E2BB /* ARKitEscavator.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		FEBB15BF2E08C4B5008F3003 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FEBB15C22E08C4BC008F3003 /* RealityKit.framework */,
+				FEBB15C02E08C4B5008F3003 /* ARKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,16 +285,18 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ZAKSG2QLGT;
+				DEVELOPMENT_TEAM = 76MD982A9T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ARKitEscavator/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Precisamos da câmera para exibir visualização em realidade aumentada.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Aplicativo precisa ter acesso a sua localização para os ssítios de escavação";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Aplicativo precisa ter acesso a sua localização para os ssítios de escavação";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Aplicativo precisa ter acesso a sua localização para os ssítios de escavação";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
@@ -300,16 +321,18 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ZAKSG2QLGT;
+				DEVELOPMENT_TEAM = 76MD982A9T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ARKitEscavator/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Precisamos da câmera para exibir visualização em realidade aumentada.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Aplicativo precisa ter acesso a sua localização para os ssítios de escavação";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "Aplicativo precisa ter acesso a sua localização para os ssítios de escavação";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Aplicativo precisa ter acesso a sua localização para os ssítios de escavação";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
