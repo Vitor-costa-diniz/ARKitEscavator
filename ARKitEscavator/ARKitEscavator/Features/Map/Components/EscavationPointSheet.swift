@@ -9,6 +9,7 @@ import SwiftUI
 
 struct EscavationPointSheet: View {
     @State private var sheetHeight: CGFloat = 0
+    @ScaledMetric private var scale: CGFloat = 1
     let escavationPoint: EscavationPoint
     
     var body: some View {
@@ -40,6 +41,8 @@ struct EscavationPointSheet: View {
                         Spacer()
                         
                         Image(.shovel)
+                            .resizable()
+                            .frame(width: 20 * scale, height: 20 * scale)
                             .offset(y: 4)
                         Text("Escavar")
                             .font(.escavatorUI(.headingManjari3))

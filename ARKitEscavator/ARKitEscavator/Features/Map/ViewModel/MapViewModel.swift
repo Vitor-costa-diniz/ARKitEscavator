@@ -16,6 +16,7 @@ final class MapViewModel: ObservableObject, LocationManagerDelegate {
     @Published var centeredMapOnUser: Bool = true
     @Published var radius: Double = 30
     @Published var userLocation: String = "Carregando..."
+    @Published var selectedPoint: EscavationPoint?
     
     init() {
         locationManager.delegate = self

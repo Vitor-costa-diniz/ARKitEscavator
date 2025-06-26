@@ -9,8 +9,8 @@ import SwiftUI
 import MapKit
 
 struct UIKitMap: UIViewRepresentable {
-    let majorSites: [MajorSite]
     @StateObject var viewModel: MapViewModel
+    let onSelectSite: (EscavationPoint) -> Void
     
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
@@ -27,11 +27,9 @@ struct UIKitMap: UIViewRepresentable {
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
         if uiView.annotations.isEmpty {
-            for escavation in majorSites {
+            for escavation in viewModel.escavationSites {
                 escavation.escavationPoints.forEach {
-                    let point = MKPointAnnotation()
-                    point.title = $0.name
-                    point.coordinate = $0.coordinates
+                    let point = EscavationPointAnnotation(point: $0)
                     uiView.addAnnotation(point)
                     
                     let circle = MKCircle(center: $0.coordinates, radius: viewModel.radius)
@@ -42,10 +40,16 @@ struct UIKitMap: UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        Coordinator()
+        Coordinator(onSelectSite: onSelectSite)
     }
     
-    class Coordinator: NSObject, MKMapViewDelegate {        
+    class Coordinator: NSObject, MKMapViewDelegate {
+        let onSelectSite: (EscavationPoint) -> Void
+        
+        init(onSelectSite: @escaping (EscavationPoint) -> Void) {
+            self.onSelectSite = onSelectSite
+        }
+        
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             if let circleOverlay = overlay as? MKCircle {
                 let renderer = MKCircleRenderer(circle: circleOverlay)
@@ -77,9 +81,16 @@ struct UIKitMap: UIViewRepresentable {
             
             return annotationView
         }
+        
+        func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+            if let annotation = view.annotation as? EscavationPointAnnotation {
+                mapView.selectAnnotation(annotation, animated: false)
+                onSelectSite(annotation.point)
+            }
+        }
     }
 }
 
 #Preview {
-    UIKitMap(majorSites: [.init()], viewModel: .init())
+    UIKitMap(viewModel: .init()) { _  in}
 }

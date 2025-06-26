@@ -35,7 +35,7 @@ struct MajorSite: Decodable {
     }
 }
 
-struct EscavationPoint: Decodable {
+struct EscavationPoint: Decodable, Identifiable {
     let id: Int
     let name: String
     let shortDescription: String

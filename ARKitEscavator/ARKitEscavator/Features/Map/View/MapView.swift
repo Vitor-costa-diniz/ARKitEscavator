@@ -13,14 +13,18 @@ struct MapView: View {
     
     var body: some View {
         ZStack {
-            UIKitMap(majorSites: viewModel.escavationSites, viewModel: viewModel)
+            UIKitMap(viewModel: viewModel) {
+                viewModel.selectedPoint = $0
+            }
                 .ignoresSafeArea()
             
             mapInformationAction
                 .padding(EdgeInsets(top: 8, leading: 25, bottom: 0, trailing: 20))
         }
-        .sheet(isPresented: $showSheet, content: {
-            EscavationPointSheet(escavationPoint: .init())
+        .sheet(item: $viewModel.selectedPoint, onDismiss: {
+            viewModel.selectedPoint = nil
+        }, content: { point in
+            EscavationPointSheet(escavationPoint: point)
         })
         .onAppear {
             viewModel.monitoringRegion()
