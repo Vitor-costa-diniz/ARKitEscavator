@@ -54,6 +54,18 @@ final class MapViewModel: ObservableObject, LocationManagerDelegate {
     func canEscavate() -> Bool {
         return self.selectedPoint == self.pointInRegion
     }
+    
+    func openInMaps() {
+        let destinationPlacemark = MKPlacemark(coordinate: self.selectedPoint?.coordinates ?? CLLocationCoordinate2D(latitude: -3.7304, longitude: -38.5210))
+        let destinationItem = MKMapItem(placemark: destinationPlacemark)
+        destinationItem.name = self.selectedPoint?.name
+        
+        let launchOptions: [String: Any] = [
+            MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving
+        ]
+
+        destinationItem.openInMaps(launchOptions: launchOptions)
+    }
 }
 
 // MARK: Private funcs

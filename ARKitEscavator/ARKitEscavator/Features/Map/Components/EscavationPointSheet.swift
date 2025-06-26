@@ -62,7 +62,9 @@ struct EscavationPointSheet: View {
                 .padding(.bottom, 2.7)
                 .disabled(!viewModel.canEscavate())
                 
-                Button {} label: {
+                Button {
+                    viewModel.openInMaps()
+                } label: {
                     HStack(alignment: .firstTextBaseline, spacing: 10) {
                         Spacer()
                         
