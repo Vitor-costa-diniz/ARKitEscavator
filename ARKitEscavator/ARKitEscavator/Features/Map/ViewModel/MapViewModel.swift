@@ -15,15 +15,12 @@ final class MapViewModel: ObservableObject, LocationManagerDelegate {
     weak var mapView: MKMapView?
     @Published var centeredMapOnUser: Bool = true
     @Published var radius: Double = 30
-<<<<<<< feature/ObjectsPosition
     @Published var selectedSite: EscavationSite?
-=======
     @Published var userLocation: String = "Carregando..."
     
     init() {
         locationManager.delegate = self
     }
->>>>>>> main
     
     func monitoringRegion() {
         locationManager.monitoringRegion(points: escavationSites, radius: radius) { point in
