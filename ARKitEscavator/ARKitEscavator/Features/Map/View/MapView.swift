@@ -10,7 +10,7 @@ import AVFoundation
 
 struct MapView: View {
     @EnvironmentObject private var viewModel: MapViewModel
-    @State private var showSheet: Bool = false
+    @State private var showARView: Bool = false
     
     var body: some View {
         ZStack {
@@ -26,6 +26,10 @@ struct MapView: View {
             viewModel.selectedPoint = nil
         }, content: { _ in
             EscavationPointSheet(viewModel: viewModel)
+        })
+        .fullScreenCover(isPresented: $showARView, content: {
+            ARViewContainer(site: viewModel.selectedPoint ?? .init())
+                .ignoresSafeArea()
         })
         .onAppear {
             viewModel.monitoringRegion()
