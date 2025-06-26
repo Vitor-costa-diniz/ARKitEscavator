@@ -45,19 +45,6 @@ struct UIKitMap: UIViewRepresentable {
 
                 let circle = MKCircle(center: site.coordinates, radius: radius)
                 uiView.addOverlay(circle)
-
-//         if uiView.annotations.isEmpty {
-//             for escavation in majorSites {
-//                 escavation.escavations.forEach {
-//                     let point = MKPointAnnotation()
-//                     point.title = $0.title
-//                     point.coordinate = $0.coordinates
-//                     uiView.addAnnotation(point)
-                    
-//                     let circle = MKCircle(center: $0.coordinates, radius: viewModel.radius)
-//                     uiView.addOverlay(circle)
-//                 }
-
             }
         }
     }
@@ -78,9 +65,13 @@ struct UIKitMap: UIViewRepresentable {
         }
 
         func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-            guard
-                let ann = view.annotation as? MKPointAnnotation
-            else { return }
+            guard let annotation = view.annotation else { return }
+
+            if annotation is MKUserLocation {
+                return
+            }
+
+            guard let ann = annotation as? MKPointAnnotation else { return }
 
             let coord = ann.coordinate
             if let site = sites.first(where: {
@@ -94,10 +85,9 @@ struct UIKitMap: UIViewRepresentable {
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             if let circle = overlay as? MKCircle {
                 let renderer = MKCircleRenderer(circle: circle)
-                renderer.fillColor   = UIColor.systemRed.withAlphaComponent(0.2)
-                renderer.strokeColor = UIColor.systemRed
-                renderer.lineWidth   = 1
-
+                renderer.fillColor = UIColor.systemBrown.withAlphaComponent(0.2)
+                renderer.strokeColor = UIColor(resource: .mapBorderRadius)
+                renderer.lineWidth = 1
                 return renderer
             }
             return MKOverlayRenderer(overlay: overlay)
