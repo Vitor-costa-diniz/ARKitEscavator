@@ -84,7 +84,7 @@ struct UIKitMap: UIViewRepresentable {
         
         func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
             if let annotation = view.annotation as? EscavationPointAnnotation {
-                mapView.selectAnnotation(annotation, animated: false)
+                mapView.deselectAnnotation(annotation, animated: false)
                 onSelectSite(annotation.point)
             }
         }
