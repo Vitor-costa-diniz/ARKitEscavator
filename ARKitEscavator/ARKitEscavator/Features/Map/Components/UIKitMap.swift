@@ -12,6 +12,7 @@ struct UIKitMap: UIViewRepresentable {
     @StateObject var viewModel: MapViewModel
     let onSelectSite: (EscavationPoint) -> Void
     
+
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
         mapView.showsUserLocation = true
@@ -24,7 +25,7 @@ struct UIKitMap: UIViewRepresentable {
         
         return mapView
     }
-    
+
     func updateUIView(_ uiView: MKMapView, context: Context) {
         if uiView.annotations.isEmpty {
             for escavation in viewModel.escavationSites {
@@ -38,7 +39,7 @@ struct UIKitMap: UIViewRepresentable {
             }
         }
     }
-    
+
     func makeCoordinator() -> Coordinator {
         Coordinator(onSelectSite: onSelectSite)
     }
@@ -51,8 +52,8 @@ struct UIKitMap: UIViewRepresentable {
         }
         
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-            if let circleOverlay = overlay as? MKCircle {
-                let renderer = MKCircleRenderer(circle: circleOverlay)
+            if let circle = overlay as? MKCircle {
+                let renderer = MKCircleRenderer(circle: circle)
                 renderer.fillColor = UIColor.systemBrown.withAlphaComponent(0.2)
                 renderer.strokeColor = UIColor(resource: .mapBorderRadius)
                 renderer.lineWidth = 1
