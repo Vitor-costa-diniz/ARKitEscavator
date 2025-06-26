@@ -10,7 +10,7 @@ import SwiftUI
 struct EscavationPointSheet: View {
     @State private var sheetHeight: CGFloat = 0
     @ScaledMetric private var scale: CGFloat = 1
-    let escavationPoint: EscavationPoint
+    @StateObject var viewModel: MapViewModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -18,19 +18,19 @@ struct EscavationPointSheet: View {
             VStack(alignment: .leading, spacing: 0) {
                 Image(.simpleFrame)
                     .overlay {
-                        Image(escavationPoint.objectImage)
+                        Image(viewModel.selectedPoint?.objectImage ?? "")
                     }
                     .padding(.bottom, 16)
                 
                 Group {
-                    Text(escavationPoint.name)
+                    Text(viewModel.selectedPoint?.name ?? "")
                         .font(.escavatorUI(.body1Regular))
                         .padding(.bottom, 7)
                     
-                    Text("\(escavationPoint.address)\n")
+                    Text("\(viewModel.selectedPoint?.address ?? "")\n")
                         .font(.escavatorUI(.bodyManjari4))
                     
-                    Text("\(escavationPoint.shortDescription)")
+                    Text("\(viewModel.selectedPoint?.shortDescription ?? "")")
                         .font(.escavatorUI(.bodyManjari4))
                 }
                 .fixedSize(horizontal: false, vertical: true)
@@ -100,6 +100,6 @@ struct EscavationPointSheet: View {
                 .frame(width: 400, height: 1000)
         }
         .sheet(isPresented: .constant(true)) {
-            EscavationPointSheet(escavationPoint: .init())
+            EscavationPointSheet(viewModel: .init())
         }
 }

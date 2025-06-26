@@ -17,6 +17,7 @@ final class MapViewModel: ObservableObject, LocationManagerDelegate {
     @Published var radius: Double = 30
     @Published var userLocation: String = "Carregando..."
     @Published var selectedPoint: EscavationPoint?
+    @Published var pointInRegeion: EscavationPoint?
     
     init() {
         locationManager.delegate = self
@@ -24,7 +25,7 @@ final class MapViewModel: ObservableObject, LocationManagerDelegate {
     
     func monitoringRegion() {
         locationManager.monitoringRegion(points: escavationSites, radius: radius) { point in
-            print("Entrou no raio de: \(point.name)")
+            self.pointInRegeion = point
         }
     }
     

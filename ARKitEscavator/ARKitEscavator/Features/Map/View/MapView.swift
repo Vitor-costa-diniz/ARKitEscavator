@@ -24,7 +24,7 @@ struct MapView: View {
         .sheet(item: $viewModel.selectedPoint, onDismiss: {
             viewModel.selectedPoint = nil
         }, content: { point in
-            EscavationPointSheet(escavationPoint: point)
+            EscavationPointSheet(viewModel: viewModel)
         })
         .onAppear {
             viewModel.monitoringRegion()
