@@ -9,13 +9,8 @@ import SwiftUI
 import MapKit
 
 struct UIKitMap: UIViewRepresentable {
-    let majorSites: [MajorEscavationSite]
-
-    let radius: Double
-    let onSelectSite: (EscavationSite) -> Void
-
-
     @StateObject var viewModel: MapViewModel
+    let onSelectSite: (EscavationPoint) -> Void
     
 
     func makeUIView(context: Context) -> MKMapView {
@@ -32,56 +27,30 @@ struct UIKitMap: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: MKMapView, context: Context) {
-
-        uiView.removeAnnotations(uiView.annotations)
-        uiView.removeOverlays(uiView.overlays)
-
-        for escavation in majorSites {
-            escavation.escavations.forEach { site in
-                let point = MKPointAnnotation()
-                point.title = site.title
-                point.coordinate = site.coordinates
-                uiView.addAnnotation(point)
-
-                let circle = MKCircle(center: site.coordinates, radius: radius)
-                uiView.addOverlay(circle)
+        if uiView.annotations.isEmpty {
+            for escavation in viewModel.escavationSites {
+                escavation.escavationPoints.forEach {
+                    let point = EscavationPointAnnotation(point: $0)
+                    uiView.addAnnotation(point)
+                    
+                    let circle = MKCircle(center: $0.coordinates, radius: viewModel.radius)
+                    uiView.addOverlay(circle)
+                }
             }
         }
     }
 
     func makeCoordinator() -> Coordinator {
-        Coordinator(majorSites: majorSites, onSelectSite: onSelectSite)
+        Coordinator(onSelectSite: onSelectSite)
     }
-
-
+    
     class Coordinator: NSObject, MKMapViewDelegate {
-        private let sites: [EscavationSite]
-        private let onSelectSite: (EscavationSite) -> Void
-
-        init(majorSites: [MajorEscavationSite],
-             onSelectSite: @escaping (EscavationSite) -> Void) {
-            self.sites = majorSites.flatMap { $0.escavations }
+        let onSelectSite: (EscavationPoint) -> Void
+        
+        init(onSelectSite: @escaping (EscavationPoint) -> Void) {
             self.onSelectSite = onSelectSite
         }
-
-        func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-            guard let annotation = view.annotation else { return }
-
-            if annotation is MKUserLocation {
-                return
-            }
-
-            guard let ann = annotation as? MKPointAnnotation else { return }
-
-            let coord = ann.coordinate
-            if let site = sites.first(where: {
-                abs($0.coordinates.latitude  - coord.latitude)  < 0.000001 &&
-                abs($0.coordinates.longitude - coord.longitude) < 0.000001
-            }) {
-                onSelectSite(site)
-            }
-        }
-
+        
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             if let circle = overlay as? MKCircle {
                 let renderer = MKCircleRenderer(circle: circle)
@@ -113,9 +82,16 @@ struct UIKitMap: UIViewRepresentable {
             
             return annotationView
         }
+        
+        func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+            if let annotation = view.annotation as? EscavationPointAnnotation {
+                mapView.deselectAnnotation(annotation, animated: false)
+                onSelectSite(annotation.point)
+            }
+        }
     }
 }
 
-//#Preview {
-//    UIKitMap(majorSites: [.init()], radius: 10)
-//}
+#Preview {
+    UIKitMap(viewModel: .init()) { _  in}
+}

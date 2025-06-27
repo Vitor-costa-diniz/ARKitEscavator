@@ -1,0 +1,25 @@
+[
+  {
+    "id": 1,
+    "name": "Praça do Ferreira",
+    "description": "Um dos pontos históricos mais tradicionais de Fortaleza, com grande valor cultural.",
+    "completed": false,
+    "image": "praca_do_ferreira.jpg",
+    "escavationPoints": [
+      {
+        "id": 1,
+        "name": "Relógio da Praça do Ferreira",
+        "shortDescription": "O relógio da Praça do Ferreira é um dos símbolos mais conhecidos de Fortaleza, instalado em 1933.",
+        "longDescription": "Estrutura erguida no século XX como símbolo da modernização urbana da cidade. O relógio da Praça do Ferreira é um marco arquitetônico de grande importância cultural.",
+        "object3DModel": "relogio_ferreira_3d.usdz",
+        "objectImage": "RelogioPracaFerreira",
+        "address": "R. Floriano Peixoto - Centro, Fortaleza - CE.",
+        "escavated": false,
+        "coordinates": {
+          "latitude": -3.744459241140999,
+          "longitude": -38.53652440961214
+        }
+      }
+    ]
+  }
+]

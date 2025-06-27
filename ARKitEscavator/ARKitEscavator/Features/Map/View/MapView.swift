@@ -10,27 +10,27 @@ import AVFoundation
 
 struct MapView: View {
     @EnvironmentObject private var viewModel: MapViewModel
-    @State private var selectedSite: EscavationSite?
-    @State private var showCameraPermissionAlert = false
-
+    @State private var showARView: Bool = false
+    
     var body: some View {
         ZStack {
-            UIKitMap(
-                majorSites: viewModel.escavationSites,
-                radius: viewModel.radius,
-                onSelectSite: { site in
-                    selectedSite = site
-                },
-                viewModel: viewModel
-            )
-            .ignoresSafeArea()
+            UIKitMap(viewModel: viewModel) {
+                viewModel.selectedPoint = $0
+            }
+                .ignoresSafeArea()
             
             mapInformationAction
                 .padding(EdgeInsets(top: 8, leading: 25, bottom: 0, trailing: 20))
         }
-        .fullScreenCover(item: $selectedSite) { site in
-            ARExperienceView(site: site)
-        }
+        .sheet(item: $viewModel.selectedPoint, onDismiss: {
+            viewModel.selectedPoint = nil
+        }, content: { _ in
+            EscavationPointSheet(viewModel: viewModel)
+        })
+        .fullScreenCover(isPresented: $showARView, content: {
+            ARViewContainer(site: viewModel.selectedPoint ?? .init())
+                .ignoresSafeArea()
+        })
         .onAppear {
             viewModel.monitoringRegion()
         }

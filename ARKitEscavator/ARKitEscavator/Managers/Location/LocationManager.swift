@@ -15,9 +15,9 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var userLocation: CLLocationCoordinate2D?
     
     weak var delegate: LocationManagerDelegate?
-    private var monitoredSites: [EscavationSite] = [.init()]
+    private var monitoredSites: [EscavationPoint] = [.init()]
     private var radius: Double = 10
-    private var onEnterRegion: ((EscavationSite) -> Void)?
+    private var onEnterRegion: ((EscavationPoint) -> Void)?
 
     private override init() {
         super.init()
@@ -26,9 +26,9 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         requestPermission()
     }
     
-    func monitoringRegion(points: [MajorEscavationSite], radius: Double, onEnter: @escaping (EscavationSite) -> Void) {
+    func monitoringRegion(points: [MajorSite], radius: Double, onEnter: @escaping (EscavationPoint) -> Void) {
         stopMonitoringAllRegions()
-        self.monitoredSites = points.flatMap { $0.escavations }
+        self.monitoredSites = points.flatMap { $0.escavationPoints }
         self.onEnterRegion = onEnter
         self.radius = radius
         
@@ -41,7 +41,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             let region = CLCircularRegion(
                 center: site.coordinates,
                 radius: radius,
-                identifier: site.id.uuidString
+                identifier: site.id.description
             )
             
             region.notifyOnEntry = true
@@ -68,7 +68,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        guard let site = monitoredSites.first(where: { $0.id.uuidString == region.identifier }) else {
+        guard let site = monitoredSites.first(where: { $0.id.description == region.identifier }) else {
             print("Could not find a matching site for region identifier: \(region.identifier)")
             return
         }

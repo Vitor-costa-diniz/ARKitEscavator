@@ -11,12 +11,13 @@ import CoreLocation
 
 final class MapViewModel: ObservableObject, LocationManagerDelegate {
     private var locationManager: LocationManager = LocationManager.shared
-    var escavationSites: [MajorEscavationSite] = [.init()]
+    var escavationSites: [MajorSite] = MajorSite.loadAllMajorSites()
     weak var mapView: MKMapView?
     @Published var centeredMapOnUser: Bool = true
     @Published var radius: Double = 30
-    @Published var selectedSite: EscavationSite?
     @Published var userLocation: String = "Carregando..."
+    @Published var selectedPoint: EscavationPoint?
+    @Published var pointInRegion: EscavationPoint?
     
     init() {
         locationManager.delegate = self
@@ -24,7 +25,7 @@ final class MapViewModel: ObservableObject, LocationManagerDelegate {
     
     func monitoringRegion() {
         locationManager.monitoringRegion(points: escavationSites, radius: radius) { point in
-            self.selectedSite = point
+            self.pointInRegion = point
         }
     }
     
@@ -48,6 +49,22 @@ final class MapViewModel: ObservableObject, LocationManagerDelegate {
     
     func centerMapOnUser() {
         mapView?.setUserTrackingMode(.follow, animated: true)
+    }
+    
+    func canEscavate() -> Bool {
+        return self.selectedPoint == self.pointInRegion
+    }
+    
+    func openInMaps() {
+        let destinationPlacemark = MKPlacemark(coordinate: self.selectedPoint?.coordinates ?? CLLocationCoordinate2D(latitude: -3.7304, longitude: -38.5210))
+        let destinationItem = MKMapItem(placemark: destinationPlacemark)
+        destinationItem.name = self.selectedPoint?.name
+        
+        let launchOptions: [String: Any] = [
+            MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving
+        ]
+
+        destinationItem.openInMaps(launchOptions: launchOptions)
     }
 }
 
