@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CollectionPoints: View {
     let point: MajorSite
+    let action: () -> Void
     
     var body: some View {
         ZStack {
@@ -16,7 +17,7 @@ struct CollectionPoints: View {
                 .offset(x: -30, y: -5)
                 .rotationEffect(Angle(degrees: -10))
             
-            HStack(spacing: 12) {
+            HStack {
                 Image(point.image ?? "")
                     .resizable()
                     .frame(width: 114, height: 119)
@@ -25,6 +26,7 @@ struct CollectionPoints: View {
                         Image(.doubleFrame)
                             .rotationEffect(Angle(degrees: -10))
                     }
+                    .padding(.leading, 14)
                 
                 Spacer()
                 
@@ -33,7 +35,7 @@ struct CollectionPoints: View {
                         .font(.escavatorUI(.body3Regular))
                         .foregroundStyle(.buttonIcon)
                     
-                    Button {} label: {
+                    Button { action() } label: {
                         Text("Ver mais")
                             .foregroundStyle(.buttonOverlay)
                             .font(.escavatorUI(.headingManjari3))
@@ -53,6 +55,6 @@ struct CollectionPoints: View {
 }
 
 #Preview {
-    CollectionPoints(point: .init())
+    CollectionPoints(point: .init()) {}
         .padding(.horizontal, 30)
 }

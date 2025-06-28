@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-struct MajorSite: Decodable {
+struct MajorSite: Decodable, Identifiable {
     let id: Int
     let name: String
     let description: String
