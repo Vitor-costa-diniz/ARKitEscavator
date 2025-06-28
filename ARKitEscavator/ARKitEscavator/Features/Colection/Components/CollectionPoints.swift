@@ -1,0 +1,58 @@
+//
+//  CollectionPoints.swift
+//  ARKitEscavator
+//
+//  Created by Vitor Costa on 28/06/25.
+//
+
+import SwiftUI
+
+struct CollectionPoints: View {
+    let point: MajorSite
+    
+    var body: some View {
+        ZStack {
+            Image(.collectionSprayFrame)
+                .offset(x: -30, y: -5)
+                .rotationEffect(Angle(degrees: -10))
+            
+            HStack(spacing: 12) {
+                Image(point.image ?? "")
+                    .resizable()
+                    .frame(width: 114, height: 119)
+                    .clipShape(.rect(cornerRadius: 2))
+                    .background {
+                        Image(.doubleFrame)
+                            .rotationEffect(Angle(degrees: -10))
+                    }
+                
+                Spacer()
+                
+                VStack {
+                    Text(point.name)
+                        .font(.escavatorUI(.body3Regular))
+                        .foregroundStyle(.buttonIcon)
+                    
+                    Button {} label: {
+                        Text("Ver mais")
+                            .foregroundStyle(.buttonOverlay)
+                            .font(.escavatorUI(.headingManjari3))
+                            .padding(.horizontal, 34.5)
+                            .padding(.top, 4)
+                            .padding(.vertical, 11)
+                            .background {
+                                Color.blueBackground
+                                    .clipShape(.rect(cornerRadius: 6))
+                            }
+                    }
+
+                }
+            }
+        }
+    }
+}
+
+#Preview {
+    CollectionPoints(point: .init())
+        .padding(.horizontal, 30)
+}

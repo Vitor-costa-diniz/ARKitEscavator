@@ -4,7 +4,7 @@
     "name": "Praça do Ferreira",
     "description": "Um dos pontos históricos mais tradicionais de Fortaleza, com grande valor cultural.",
     "completed": false,
-    "image": "praca_do_ferreira.jpg",
+    "image": "RelogioPracaFerreira",
     "escavationPoints": [
       {
         "id": 1,

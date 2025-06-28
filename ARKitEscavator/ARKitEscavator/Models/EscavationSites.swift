@@ -30,7 +30,7 @@ struct MajorSite: Decodable {
         self.name = "Praça do Ferreira"
         self.description = "Um dos pontos históricos mais tradicionais de Fortaleza, com grande valor cultural."
         self.completed = false
-        self.image = nil
+        self.image = "RelogioPracaFerreira"
         self.escavationPoints = [.init()]
     }
 }
