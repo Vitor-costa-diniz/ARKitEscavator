@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-struct MajorSite: Decodable, Identifiable {
+struct MajorSite: Decodable, Identifiable, Hashable {
     let id: Int
     let name: String
     let description: String
@@ -35,7 +35,19 @@ struct MajorSite: Decodable, Identifiable {
     }
 }
 
-struct EscavationPoint: Decodable, Identifiable, Equatable {
+extension MajorSite {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(name)
+        hasher.combine(description)
+        hasher.combine(completed)
+        hasher.combine(image)
+        hasher.combine(escavationPoints)
+    }
+}
+
+
+struct EscavationPoint: Decodable, Identifiable, Equatable, Hashable {
     let id: Int
     let name: String
     let shortDescription: String
@@ -86,6 +98,20 @@ struct EscavationPoint: Decodable, Identifiable, Equatable {
     
     static func == (lhs: EscavationPoint, rhs: EscavationPoint) -> Bool {
         lhs.id == rhs.id
+    }
+    
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(name)
+        hasher.combine(shortDescription)
+        hasher.combine(longDescription)
+        hasher.combine(object3DModel)
+        hasher.combine(objectImage)
+        hasher.combine(address)
+        hasher.combine(escavated)
+        hasher.combine(coordinates.latitude)
+        hasher.combine(coordinates.longitude)
     }
 }
 

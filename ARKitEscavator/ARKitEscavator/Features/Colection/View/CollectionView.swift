@@ -11,28 +11,34 @@ struct CollectionView: View {
     @State private var selectedSite: MajorSite?
     
     var body: some View {
-        GeometryReader { geo in
-            Color.buttonOverlay
-                .ignoresSafeArea()
-            
-            Image(.collectionSprayTop)
-                .offset(x: geo.size.height * 0.02, y: -geo.size.height * 0.22)
-            
-            VStack {
-                Text("Coleção")
-                    .font(.escavatorUI(.body5Regular))
-                    .foregroundStyle(.buttonIcon)
+        NavigationStack {
+            GeometryReader { geo in
+                Color.buttonOverlay
+                    .ignoresSafeArea()
                 
-                ScrollView {
-                    ForEach(MajorSite.loadAllMajorSites()) { site in
-                        CollectionPoints(point: site) {
-                            selectedSite = site
+                Image(.collectionSprayTop)
+                    .offset(x: geo.size.height * 0.02, y: -geo.size.height * 0.22)
+                
+                VStack {
+                    Text("Coleção")
+                        .font(.escavatorUI(.body5Regular))
+                        .foregroundStyle(.buttonIcon)
+                    
+                    ScrollView {
+                        ForEach(MajorSite.loadAllMajorSites()) { site in
+                            CollectionPoints(point: site) {
+                                selectedSite = site
+                            }
                         }
+                        .padding(.horizontal, 30)
+                        .padding(.top, 8)
                     }
-                    .padding(.horizontal, 30)
+                    
+                    Spacer()
                 }
-                
-                Spacer()
+                .navigationDestination(item: $selectedSite) { point in
+                    Text(point.description)
+                }
             }
         }
         .onAppear {
