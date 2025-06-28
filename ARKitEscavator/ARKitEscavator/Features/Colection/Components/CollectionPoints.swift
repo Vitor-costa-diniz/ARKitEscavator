@@ -26,6 +26,11 @@ struct CollectionPoints: View {
                         Image(.doubleFrame)
                             .rotationEffect(Angle(degrees: -10))
                     }
+                    .overlay {
+                        SmalLabelComponent(text: "0/4", colorType: .green)
+                            .offset(x: -5, y: -69)
+                            .rotationEffect(Angle(degrees: -33))
+                    }
                     .padding(.leading, 14)
                 
                 Spacer()
