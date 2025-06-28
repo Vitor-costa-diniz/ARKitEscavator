@@ -20,7 +20,7 @@ struct AppTabView: View {
                 }
                 
                 Tab("Coleção", systemImage: "house", value: 1) {
-                    Text("Bau")
+                    CollectionView()
                 }
             }
             
