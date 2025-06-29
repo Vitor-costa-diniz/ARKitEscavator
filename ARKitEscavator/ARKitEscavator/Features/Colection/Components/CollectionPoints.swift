@@ -20,8 +20,13 @@ struct CollectionPoints: View {
             HStack {
                 Image(point.image ?? "")
                     .resizable()
+                    .scaledToFill()
                     .frame(width: 114, height: 119)
-                    .clipShape(.rect(cornerRadius: 2))
+                    .clipped()
+                    .mask(
+                        RoundedRectangle(cornerRadius: 2)
+                            .frame(width: 114, height: 119)
+                    )
                     .background {
                         Image(.doubleFrame)
                             .rotationEffect(Angle(degrees: -10))
